@@ -1,12 +1,13 @@
 import { Button, ButtonBase, InputBase } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
-import React from "react";
-import logo from "../../assets/images/logo.svg";
-import imageHeader from "../../assets/images/imageHeader.jpg";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import MovieIcon from "@material-ui/icons/Movie";
+import SearchIcon from "@material-ui/icons/Search";
+import React from "react";
+import imageHeader from "../../assets/images/imageHeader.jpg";
+import logo from "../../assets/images/logo.svg";
+import Courses from "../Courses";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -68,13 +69,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     contentTitle: {},
     courses: {
-      background: "#bbbbbb",
       display: "flex",
       justifyContent: "center",
-      height: "1100px",
     },
     course: {
-      background: "lightblue",
       width: "1340px",
       height: "auto",
     },
@@ -210,7 +208,9 @@ export default function Variants() {
       </Paper>
 
       <Paper className={classes.courses}>
-        <Paper className={classes.course}> </Paper>
+        <Paper elevation={0} className={classes.course}>
+          <Courses></Courses>
+        </Paper>
       </Paper>
 
       <Paper className={classes.categories}>

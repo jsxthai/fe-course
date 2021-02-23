@@ -22,7 +22,7 @@ const styles = {
 
 function App(props: Props) {
   return (
-    <div className="App">
+    <div>
       <Header></Header>
     </div>
   );
