@@ -1,4 +1,4 @@
-import { Button, ButtonBase, InputBase } from "@material-ui/core";
+import { Button, ButtonBase, InputBase, Typography } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
@@ -7,6 +7,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
 import imageHeader from "../../assets/images/imageHeader.jpg";
 import logo from "../../assets/images/logo.svg";
+import Categories from "../Categries";
 import Courses from "../Courses";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -78,18 +79,6 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "auto",
     },
 
-    categories: {
-      background: "#bbbbbb",
-      display: "flex",
-      justifyContent: "center",
-      height: "933px",
-    },
-
-    category: {
-      background: "yellow",
-      width: "1340px",
-      height: "auto",
-    },
     logo: {
       width: "110px",
       height: "31px",
@@ -211,15 +200,15 @@ export default function Variants() {
         </Paper>
       </Paper>
 
-      <Paper className={classes.courses}>
+      {/* courses */}
+      <Paper elevation={0} className={classes.courses}>
         <Paper elevation={0} className={classes.course}>
           <Courses></Courses>
         </Paper>
       </Paper>
 
-      <Paper className={classes.categories}>
-        <Paper className={classes.category}> </Paper>
-      </Paper>
+      {/* list categories */}
+      <Categories />
     </Paper>
   );
 }

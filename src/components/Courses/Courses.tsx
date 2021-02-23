@@ -48,18 +48,6 @@ export default function Courses() {
         <Grid item>
           <Course />
         </Grid>
-        <Grid item>
-          <Course />
-        </Grid>
-        <Grid item>
-          <Course />
-        </Grid>
-        <Grid item>
-          <Course />
-        </Grid>
-        <Grid item>
-          <Course />
-        </Grid>
       </Grid>
     </div>
   );
