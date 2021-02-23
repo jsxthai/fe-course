@@ -16,11 +16,13 @@ import React from "react";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      maxWidth: 243,
+      // maxWidth: 300,
+      width: 300,
       borderRadius: 4,
     },
     media: {
-      height: 138,
+      height: 160,
+      // height: "auto",
       borderRadius: 4,
       border: "1px solid #dcdacb",
       cursor: "pointer",
@@ -53,7 +55,23 @@ const Course = () => {
         <Typography gutterBottom variant="h6" component="h2">
           2021 Complete Python
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
+
+        <Typography
+          gutterBottom
+          variant="body2"
+          color="textSecondary"
+          component="p"
+        >
+          {
+            "Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code templates included."
+          }
+        </Typography>
+        <Typography
+          gutterBottom
+          variant="h6"
+          color="textSecondary"
+          component="p"
+        >
           {"Thai Pham"}
         </Typography>
         <Paper elevation={0} className={classes.bestseller}>

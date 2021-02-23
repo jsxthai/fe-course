@@ -31,8 +31,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     img: {
       width: "1340px",
-      height: "400px",
+      height: "auto",
       background: "#000",
+      maxWidth: "100%",
     },
     headerImg: {
       background: "#fff",
@@ -129,6 +130,9 @@ const useStyles = makeStyles((theme: Theme) =>
     margin03: {
       margin: "0.3rem",
     },
+    titleDetailText: {
+      marginLeft: "1rem",
+    },
   })
 );
 
@@ -181,8 +185,8 @@ export default function Variants() {
             <div className={classes.logoTitle}>
               <MovieIcon />
             </div>
-            <div>
-              <div>130,000 online courses</div>
+            <div className={classes.titleDetailText}>
+              <h2>130,000 online courses</h2>
               <div>Enjoy a variety of fresh topics</div>
             </div>
           </Paper>
@@ -190,8 +194,8 @@ export default function Variants() {
             <div className={classes.logoTitle}>
               <MovieIcon />
             </div>
-            <div>
-              <div>Expert instruction</div>
+            <div className={classes.titleDetailText}>
+              <h2>Expert instruction</h2>
               <div>Find the right instructor for you</div>
             </div>
           </Paper>
@@ -199,8 +203,8 @@ export default function Variants() {
             <div className={classes.logoTitle}>
               <MovieIcon />
             </div>
-            <div>
-              <div>Lifetime access</div>
+            <div className={classes.titleDetailText}>
+              <h2>Lifetime access</h2>
               <div>Learn on your schedule</div>
             </div>
           </Paper>

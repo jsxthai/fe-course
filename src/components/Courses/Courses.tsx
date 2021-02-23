@@ -6,12 +6,8 @@ import Course from "./Course/Course";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: "center",
-      color: theme.palette.text.secondary,
+      display: "flex",
+      flexWrap: "wrap",
     },
   })
 );
@@ -23,27 +19,47 @@ export default function Courses() {
     <div className={classes.root}>
       <Grid
         container
-        direction="row"
-        justify="center"
+        alignContent="center"
         alignItems="center"
-        alignContent="stretch"
-        spacing={2}
+        justify="space-around"
+        spacing={1}
       >
-        <Grid item xs={2}>
-          <Course></Course>
+        <Grid item>
+          <Course />
         </Grid>
-        <Grid item xs={2}>
-          <Course></Course>
+        <Grid item>
+          <Course />
         </Grid>
-        <Grid item xs={2}>
-          <Course></Course>
-        </Grid>{" "}
-        <Grid item xs={2}>
-          <Course></Course>
-        </Grid>{" "}
-        <Grid item xs={2}>
-          <Course></Course>
-        </Grid>{" "}
+        <Grid item>
+          <Course />
+        </Grid>
+        <Grid item>
+          <Course />
+        </Grid>
+        <Grid item>
+          <Course />
+        </Grid>
+        <Grid item>
+          <Course />
+        </Grid>
+        <Grid item>
+          <Course />
+        </Grid>
+        <Grid item>
+          <Course />
+        </Grid>
+        <Grid item>
+          <Course />
+        </Grid>
+        <Grid item>
+          <Course />
+        </Grid>
+        <Grid item>
+          <Course />
+        </Grid>
+        <Grid item>
+          <Course />
+        </Grid>
       </Grid>
     </div>
   );
