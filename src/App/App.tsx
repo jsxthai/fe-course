@@ -1,40 +1,31 @@
-import {
-  Checkbox,
-  createStyles,
-  makeStyles,
-  Theme as AugmentedTheme,
-} from "@material-ui/core";
-import React from "react";
+import { withStyles, WithStyles } from "@material-ui/core/styles";
+import React, { memo } from "react";
+import Header from "../components/Header";
 import "./App.css";
 
-const useStyles = makeStyles((theme: AugmentedTheme) =>
-  createStyles({
-    root: {
-      color: theme.status.danger,
-      "&$checked": {
-        color: theme.status.danger,
-      },
-    },
-    checked: {},
-  })
-);
+interface Props extends WithStyles<typeof styles> {
+  children?: React.ReactNode;
+  className?: string;
+}
 
-function App() {
-  const classes = useStyles();
+const styles = {
+  root: {
+    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+    borderRadius: 3,
+    border: 0,
+    color: "white",
+    height: 48,
+    padding: "0 30px",
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+  },
+};
+
+function App(props: Props) {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Pham Quoc Thai</h1>
-        <Checkbox
-          defaultChecked
-          classes={{
-            root: classes.root,
-            checked: classes.checked,
-          }}
-        />
-      </header>
+      <Header></Header>
     </div>
   );
 }
 
-export default App;
+export default memo(withStyles(styles)(App));

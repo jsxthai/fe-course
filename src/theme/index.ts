@@ -6,11 +6,17 @@ declare module "@material-ui/core/styles/createMuiTheme" {
     status: {
       danger: string;
     };
+    myShape?: {
+      borderRadius: string;
+    };
   }
   // allow configuration using `createMuiTheme`
   interface ThemeOptions {
     status?: {
       danger?: string;
+    };
+    myShape?: {
+      borderRadius: string;
     };
   }
 }
@@ -18,5 +24,14 @@ declare module "@material-ui/core/styles/createMuiTheme" {
 export default createMuiTheme({
   status: {
     danger: red[500],
+  },
+  shape: {
+    borderRadius: 0,
+  },
+  overrides: {
+    MuiPaper: {},
+  },
+  myShape: {
+    borderRadius: "50px",
   },
 });
