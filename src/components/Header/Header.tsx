@@ -4,6 +4,9 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
 import logo from "../../assets/images/logo.svg";
+import imageHeader from "../../assets/images/imageHeader.jpg";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import MovieIcon from "@material-ui/icons/Movie";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -13,18 +16,16 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     header: {
       display: "flex",
-      background: "#fff",
       height: "72px",
       witdh: "90vw",
       flexDirection: "row",
       alignItems: "center",
       position: "relative",
       justifyContent: "space-between",
+      boxShadow: "0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%)",
     },
     cateMenu: {
       height: "100%",
-      // justifyContent: "center",
-      // alignItems: "center",
       lineHeight: "50%",
     },
     img: {
@@ -33,22 +34,39 @@ const useStyles = makeStyles((theme: Theme) =>
       background: "#000",
     },
     headerImg: {
-      background: "#bbbbbb",
+      background: "#fff",
       display: "flex",
       justifyContent: "center",
     },
     headerTitle: {
       display: "flex",
-      background: "#bbbbbb",
       height: "97px",
       justifyContent: "center",
     },
     title: {
-      background: "red",
       width: "1340px",
       height: "auto",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-around",
     },
-
+    titleDetail: {
+      height: "48px",
+      width: "270px",
+      display: "flex",
+      alignItems: "center",
+    },
+    logoTitle: {
+      width: "48px",
+      height: "48px",
+      background: "#f2fbfc",
+      color: "#0f7c90",
+      borderRadius: "50%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    contentTitle: {},
     courses: {
       background: "#bbbbbb",
       display: "flex",
@@ -107,10 +125,17 @@ const useStyles = makeStyles((theme: Theme) =>
     menuCategory: {
       margin: "0 1.5rem",
     },
+    cartIcon: {
+      margin: "0 1.3rem",
+    },
+    margin03: {
+      margin: "0.3rem",
+    },
   })
 );
 
 // #3c3b37
+// media 800px
 
 export default function Variants() {
   const classes = useStyles();
@@ -126,7 +151,7 @@ export default function Variants() {
           </ButtonBase>
           <form action="" className={classes.searchForm}>
             <ButtonBase disableRipple>
-              <SearchIcon style={{ color: "#73726c" }}></SearchIcon>
+              <SearchIcon style={{ color: "#73726c" }} />
             </ButtonBase>
             <InputBase
               className={classes.search}
@@ -135,16 +160,53 @@ export default function Variants() {
           </form>
         </div>
         <div className={classes.rightMenu}>
-          <Button>Sign up</Button>
-          <Button>Login</Button>
+          <ButtonBase disableRipple className={classes.cartIcon}>
+            <AddShoppingCartIcon />
+          </ButtonBase>
+          <Button disableRipple variant="outlined" color="secondary">
+            Log in
+          </Button>
+          <div className={classes.margin03}></div>
+          <Button disableRipple variant="outlined" color="primary">
+            Sign up
+          </Button>
         </div>
       </Paper>
+
       <Paper className={classes.headerImg}>
-        <Paper className={classes.img}></Paper>
+        <img className={classes.img} src={imageHeader} alt="header" />
       </Paper>
 
       <Paper className={classes.headerTitle}>
-        <Paper className={classes.title}> </Paper>
+        <Paper elevation={0} className={classes.title}>
+          <Paper elevation={0} className={classes.titleDetail}>
+            <div className={classes.logoTitle}>
+              <MovieIcon />
+            </div>
+            <div>
+              <div>130,000 online courses</div>
+              <div>Enjoy a variety of fresh topics</div>
+            </div>
+          </Paper>
+          <Paper elevation={0} className={classes.titleDetail}>
+            <div className={classes.logoTitle}>
+              <MovieIcon />
+            </div>
+            <div>
+              <div>Expert instruction</div>
+              <div>Find the right instructor for you</div>
+            </div>
+          </Paper>
+          <Paper elevation={0} className={classes.titleDetail}>
+            <div className={classes.logoTitle}>
+              <MovieIcon />
+            </div>
+            <div>
+              <div>Lifetime access</div>
+              <div>Learn on your schedule</div>
+            </div>
+          </Paper>
+        </Paper>
       </Paper>
 
       <Paper className={classes.courses}>
