@@ -2,6 +2,7 @@ import Grid from "@material-ui/core/Grid";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import React from "react";
 import Course from "./Course/Course";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,6 +18,9 @@ export default function Courses() {
 
   return (
     <div className={classes.root}>
+      <Typography gutterBottom variant="h5" component="h2">
+        Courses
+      </Typography>
       <Grid
         container
         alignContent="center"

@@ -7,8 +7,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
-
-import design from "../../assets/images/design.jpg";
 import Category from "./Category";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -73,11 +71,11 @@ const Categories = () => {
   const classes = useStyles();
   return (
     <>
+      <Typography gutterBottom variant="h5" component="h2">
+        Top categories
+      </Typography>
       <Paper elevation={0} className={classes.categories}>
         <Paper elevation={0} className={classes.category}>
-          <Typography gutterBottom variant="h5" component="h2">
-            Top categories
-          </Typography>
           <Grid
             container
             alignContent="center"
