@@ -2,11 +2,10 @@ import { Button, ButtonBase, InputBase } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
-import imageHeader from "../../assets/images/imageHeader.jpg";
+import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
-import HeaderTitle from "./HeaderTitle/indes";
+import Search from "./Search";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,17 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
     cateMenu: {
       height: "100%",
       lineHeight: "50%",
-    },
-    img: {
-      width: "1340px",
-      height: "auto",
-      background: "#000",
-      maxWidth: "100%",
-    },
-    headerImg: {
-      background: "#fff",
-      display: "flex",
-      justifyContent: "center",
     },
     headerTitle: {
       display: "flex",
@@ -120,11 +108,12 @@ const useStyles = makeStyles((theme: Theme) =>
     titleDetailText: {
       marginLeft: "1rem",
     },
+    link: {
+      textDecoration: "none",
+      color: "#3c3b37",
+    },
   })
 );
-
-// #3c3b37
-// media 800px
 
 export default function Variants() {
   const classes = useStyles();
@@ -133,22 +122,19 @@ export default function Variants() {
     <>
       <Paper elevation={0} className={classes.header}>
         <div className={classes.leftMenu}>
-          <img className={classes.logo} src={logo} alt={"logo"} />
+          <Link to="/">
+            <img className={classes.logo} src={logo} alt={"logo"} />
+          </Link>
 
-          <ButtonBase className={classes.menuCategory} disableRipple>
-            Categories
-          </ButtonBase>
-          <form action="" className={classes.searchForm}>
-            <ButtonBase disableRipple>
-              <SearchIcon style={{ color: "#73726c" }} />
+          <Link to="/categories" className={classes.link}>
+            <ButtonBase className={classes.menuCategory} disableRipple>
+              Categories
             </ButtonBase>
-            <InputBase
-              fullWidth
-              className={classes.search}
-              placeholder="Search ..."
-            ></InputBase>
-          </form>
+          </Link>
+          {/* //search */}
+          <Search />
         </div>
+
         <div className={classes.rightMenu}>
           <ButtonBase disableRipple className={classes.cartIcon}>
             <AddShoppingCartIcon />
@@ -162,12 +148,9 @@ export default function Variants() {
           </Button>
         </div>
       </Paper>
+      {/* 
 
-      <Paper className={classes.headerImg}>
-        <img className={classes.img} src={imageHeader} alt="header" />
-      </Paper>
-
-      <HeaderTitle />
+      <HeaderTitle /> */}
     </>
   );
 }

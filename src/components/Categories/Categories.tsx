@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import Category from "./Category";
+import { data } from "./data.text";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,47 +27,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const arr = [
-  {
-    src: "https://s.udemycdn.com/home/top-categories/lohp-category-design.jpg",
-    name: "Desgin",
-  },
-  {
-    src:
-      "https://s.udemycdn.com/home/top-categories/lohp-category-development.jpg",
-    name: "Development",
-  },
-  {
-    src:
-      "https://s.udemycdn.com/home/top-categories/lohp-category-marketing.jpg",
-    name: "Marketing",
-  },
-  {
-    src:
-      "https://s.udemycdn.com/home/top-categories/lohp-category-it-and-software.jpg",
-    name: "IT and Software",
-  },
-  {
-    src:
-      "https://s.udemycdn.com/home/top-categories/lohp-category-personal-development.jpg",
-    name: "Personal Development",
-  },
-  {
-    src:
-      "https://s.udemycdn.com/home/top-categories/lohp-category-business.jpg",
-    name: "Business",
-  },
-  {
-    src:
-      "https://s.udemycdn.com/home/top-categories/lohp-category-photography.jpg",
-    name: "Photography",
-  },
-  {
-    src: "https://s.udemycdn.com/home/top-categories/lohp-category-music.jpg",
-    name: "Music",
-  },
-];
-
 const Categories = () => {
   const classes = useStyles();
   return (
@@ -83,8 +43,8 @@ const Categories = () => {
             justify="space-around"
             spacing={1}
           >
-            {arr.map((item) => (
-              <Grid item>
+            {data.map((item, index) => (
+              <Grid item key={index}>
                 <Category src={item.src} name={item.name} />
               </Grid>
             ))}

@@ -29,7 +29,6 @@ export default createMuiTheme({
     borderRadius: 0,
   },
   overrides: {
-    MuiPaper: {},
     MuiButton: {
       outlinedSecondary: {
         textTransform: "unset",

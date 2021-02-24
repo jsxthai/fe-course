@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
+import { Link, Route, useRouteMatch } from "react-router-dom";
 import React from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -39,43 +40,54 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Course = () => {
-  const classes = useStyles();
-  return (
-    <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        title="Paella dish"
-        image="https://img-a.udemycdn.com/course/240x135/567828_67d0.jpg?U1A3meyOU2jrEdTUMTvWzJpdzjIzlYdKBUPkVqFiIIyugs2U4PDpgSjwAFxVdJaeAAXA3t3ESRo9vh42eJuKLz4ILX-4t3UYv3FW0s6P3Er7gqSduM16QfwfuihD"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h6" component="h2">
-          2021 Complete Python
-        </Typography>
+interface Props {
+  id: string;
+  link: string;
+}
 
-        <Typography
-          gutterBottom
-          variant="body2"
-          color="textSecondary"
-          component="p"
-        >
-          {
-            "Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code templates included."
-          }
-        </Typography>
-        <Typography
-          gutterBottom
-          variant="h6"
-          color="textSecondary"
-          component="p"
-        >
-          {"Thai Pham"}
-        </Typography>
-        <Paper elevation={0} className={classes.bestseller}>
-          Bestseller
-        </Paper>
-      </CardContent>
-    </Card>
+const Course = ({ id, link }: Props) => {
+  const classes = useStyles();
+
+  return (
+    <Route>
+      <Card className={classes.root}>
+        <CardMedia
+          component={Link}
+          to={link}
+          className={classes.media}
+          title="Paella dish"
+          image="https://img-a.udemycdn.com/course/240x135/567828_67d0.jpg?U1A3meyOU2jrEdTUMTvWzJpdzjIzlYdKBUPkVqFiIIyugs2U4PDpgSjwAFxVdJaeAAXA3t3ESRo9vh42eJuKLz4ILX-4t3UYv3FW0s6P3Er7gqSduM16QfwfuihD"
+          // onClick={handleClick}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h6" component="h2">
+            2021 Complete Python
+          </Typography>
+
+          <Typography
+            gutterBottom
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
+            {
+              "Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code templates included."
+            }
+          </Typography>
+          <Typography
+            gutterBottom
+            variant="h6"
+            color="textSecondary"
+            component="p"
+          >
+            {"Thai Pham"}
+          </Typography>
+          <Paper elevation={0} className={classes.bestseller}>
+            Bestseller
+          </Paper>
+        </CardContent>
+      </Card>
+    </Route>
   );
 };
 

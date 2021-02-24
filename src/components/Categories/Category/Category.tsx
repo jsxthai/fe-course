@@ -30,7 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     itemCategory: {
       border: "1px solid #dcdacb",
-      width: 300,
+      boxSizing: "border-box",
+      width: 302,
       height: 426,
       borderRadius: 4,
     },
