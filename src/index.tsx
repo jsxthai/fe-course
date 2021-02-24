@@ -5,14 +5,19 @@ import App from "./App";
 import "./index.css";
 import theme from "./theme";
 import { BrowserRouter as Router } from "react-router-dom";
+import { ApolloProvider } from "@apollo/client";
+
+import client from "./setup/apolloClient";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </Router>
+    <ApolloProvider client={client}>
+      <Router>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </Router>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -8,8 +8,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
-import { Link, Route, useRouteMatch } from "react-router-dom";
 import React from "react";
+import { Link, Route } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,12 +40,16 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface Props {
-  id: string;
-  link: string;
+interface CoursesData {
+  id: number;
+  name: string;
+  price: number;
+  user: {
+    name: string;
+  };
 }
 
-const Course = ({ id, link }: Props) => {
+const Course = ({ data }: { data: CoursesData }) => {
   const classes = useStyles();
 
   return (
@@ -53,7 +57,7 @@ const Course = ({ id, link }: Props) => {
       <Card className={classes.root}>
         <CardMedia
           component={Link}
-          to={link}
+          to={`/course/${data.name}`}
           className={classes.media}
           title="Paella dish"
           image="https://img-a.udemycdn.com/course/240x135/567828_67d0.jpg?U1A3meyOU2jrEdTUMTvWzJpdzjIzlYdKBUPkVqFiIIyugs2U4PDpgSjwAFxVdJaeAAXA3t3ESRo9vh42eJuKLz4ILX-4t3UYv3FW0s6P3Er7gqSduM16QfwfuihD"
@@ -61,7 +65,7 @@ const Course = ({ id, link }: Props) => {
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="h2">
-            2021 Complete Python
+            {data.name}
           </Typography>
 
           <Typography
@@ -80,7 +84,7 @@ const Course = ({ id, link }: Props) => {
             color="textSecondary"
             component="p"
           >
-            {"Thai Pham"}
+            {data.user.name}
           </Typography>
           <Paper elevation={0} className={classes.bestseller}>
             Bestseller
