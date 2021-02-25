@@ -2,6 +2,7 @@ import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import React from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
+import Categories from "../Categories";
 import CourseDetail from "../CourseDetail";
 import Courses from "../Courses";
 import Header from "../Header";
@@ -33,6 +34,7 @@ export default function HomePage() {
         <Route exact path={"/"}>
           <HeaderTitle />
           <Courses />
+          <Categories />
         </Route>
         <Route exact path={"/course/:name"}>
           <CourseDetail />
@@ -41,8 +43,6 @@ export default function HomePage() {
           <ResultSearch text={String(query.get("text"))} />
         </Route>
       </Switch>
-
-      {/* <Categories /> */}
     </Paper>
   );
 }
