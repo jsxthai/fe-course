@@ -18,6 +18,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import React from "react";
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
+import Error from "../Error";
 import Modal from "../Modal";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -90,7 +91,7 @@ const CourseDetail = (): JSX.Element => {
   let { name }: { name: string } = useParams();
   const classes = useStyles();
   if (name === "10") {
-    return <h1>not found course: {name}</h1>;
+    return <Error error={"Not found course"} />;
   }
 
   const isEnroll = false;
