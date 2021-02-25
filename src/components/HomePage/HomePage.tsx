@@ -7,7 +7,9 @@ import CourseDetailPage from "../CourseDetailPage";
 import Courses from "../Courses";
 import Header from "../Header";
 import HeaderTitle from "../Header/HeaderTitle";
+import Login from "../Login";
 import ResultSearch from "../ResultSearch";
+import Signup from "../Signup";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,6 +40,12 @@ export default function HomePage() {
         </Route>
         <Route exact path={"/course/:id"}>
           <CourseDetailPage />
+        </Route>
+        <Route exact path={"/login"}>
+          <Login />
+        </Route>
+        <Route exact path={"/signup"}>
+          <Signup />
         </Route>
         <Route exact path={"/search"}>
           <ResultSearch text={String(query.get("text"))} />

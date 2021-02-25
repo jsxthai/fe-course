@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 426,
       borderRadius: 4,
       cursor: "pointer",
+      "&:hover": {
+        opacity: 0.8,
+      },
     },
     itemCategoryName: {
       padding: "0.5rem 0 0 1rem",
