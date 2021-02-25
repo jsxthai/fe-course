@@ -28,7 +28,7 @@ export default function HomePage() {
   console.log(query.get("text"));
 
   return (
-    <Paper className={classes.body}>
+    <Paper elevation={0} className={classes.body}>
       <Header />
       <Switch>
         <Route exact path={"/"}>

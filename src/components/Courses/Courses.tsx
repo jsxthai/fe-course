@@ -25,22 +25,28 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: "flex",
-      flexWrap: "wrap",
+      // flexWrap: "wrap",
       justifyContent: "center",
     },
     courses: {
-      width: 1340,
+      maxWidth: 1340,
+      display: "flex",
     },
     wrap: {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
+      justifyItems: "center",
     },
     pagi: {
       width: "auto",
       display: "flex",
       justifyItems: "center",
       alignItems: "center",
+    },
+    course: {
+      margin: "2rem 1rem",
+      fontWeight: "bold",
     },
   })
 );
@@ -61,8 +67,13 @@ export default function Courses(): JSX.Element {
   return (
     <div className={classes.wrap}>
       <div>
-        <Typography gutterBottom variant="h5" component="h2">
-          Courses
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="h2"
+          className={classes.course}
+        >
+          All Courses
         </Typography>
         <div className={classes.root}>
           <Grid
@@ -71,7 +82,8 @@ export default function Courses(): JSX.Element {
             alignContent="center"
             alignItems="center"
             justify="space-around"
-            spacing={1}
+            wrap="wrap"
+            spacing={2}
           >
             {
               // pagination with array

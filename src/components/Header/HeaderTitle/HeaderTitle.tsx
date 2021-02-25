@@ -1,3 +1,4 @@
+import { Hidden } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
@@ -64,37 +65,39 @@ export default function Variants() {
         <img className={classes.img} src={imageHeader} alt="header" />
       </Paper>
 
-      <Paper className={classes.headerTitle}>
-        <Paper elevation={0} className={classes.title}>
-          <Paper elevation={0} className={classes.titleDetail}>
-            <div className={classes.logoTitle}>
-              <MovieIcon />
-            </div>
-            <div className={classes.titleDetailText}>
-              <h2>130 online courses</h2>
-              <div>Enjoy a variety of fresh topics</div>
-            </div>
-          </Paper>
-          <Paper elevation={0} className={classes.titleDetail}>
-            <div className={classes.logoTitle}>
-              <LocalLibraryIcon />
-            </div>
-            <div className={classes.titleDetailText}>
-              <h2>Expert instruction</h2>
-              <div>Find the right instructor for you</div>
-            </div>
-          </Paper>
-          <Paper elevation={0} className={classes.titleDetail}>
-            <div className={classes.logoTitle}>
-              <OndemandVideoIcon />
-            </div>
-            <div className={classes.titleDetailText}>
-              <h2>Lifetime access</h2>
-              <div>Learn on your schedule</div>
-            </div>
+      <Hidden smDown>
+        <Paper className={classes.headerTitle}>
+          <Paper elevation={0} className={classes.title}>
+            <Paper elevation={0} className={classes.titleDetail}>
+              <div className={classes.logoTitle}>
+                <MovieIcon />
+              </div>
+              <div className={classes.titleDetailText}>
+                <h2>130 online courses</h2>
+                <div>Enjoy a variety of fresh topics</div>
+              </div>
+            </Paper>
+            <Paper elevation={0} className={classes.titleDetail}>
+              <div className={classes.logoTitle}>
+                <LocalLibraryIcon />
+              </div>
+              <div className={classes.titleDetailText}>
+                <h2>Expert instruction</h2>
+                <div>Find the right instructor for you</div>
+              </div>
+            </Paper>
+            <Paper elevation={0} className={classes.titleDetail}>
+              <div className={classes.logoTitle}>
+                <OndemandVideoIcon />
+              </div>
+              <div className={classes.titleDetailText}>
+                <h2>Lifetime access</h2>
+                <div>Learn on your schedule</div>
+              </div>
+            </Paper>
           </Paper>
         </Paper>
-      </Paper>
+      </Hidden>
     </>
   );
 }

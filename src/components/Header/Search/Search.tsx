@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const Search = () => {
   const classes = useStyles();
   let history = useHistory();
-  const textSearch = "ssssssssstextsearch";
+  const textSearch = "text search";
   const handleSearch = () => {
     history.push("/search?text=" + textSearch);
   };

@@ -15,8 +15,9 @@ import { CoursesData } from "../interface";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      // maxWidth: 300,
-      width: 300,
+      maxWidth: 300,
+      width: 260,
+      minWidth: 200,
       borderRadius: 4,
     },
     media: {

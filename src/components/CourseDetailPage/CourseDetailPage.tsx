@@ -76,6 +76,10 @@ const useStyles = makeStyles((theme: Theme) =>
         border: "none",
       },
     },
+    image: {
+      width: "340px",
+      height: "191px",
+    },
   })
 );
 
@@ -84,6 +88,8 @@ const GET_DETAIL_COURSE = gql`
     course(id: $id) {
       name
       price
+      image
+      description
       user {
         name
       }
@@ -121,7 +127,6 @@ const CourseDetail = (): JSX.Element => {
   if (error) return <div>Error {error}</div>;
 
   const isEnroll = false;
-
   return (
     <div>
       <Paper elevation={0} className={classes.root}>
@@ -193,10 +198,15 @@ const CourseDetail = (): JSX.Element => {
             <Paper elevation={0} className={classes.cententRight}>
               <Paper elevation={0} className={classes.intro}>
                 {/* player */}
-                <ReactPlayer
+                {/* <ReactPlayer
                   width="340px"
                   height="191px"
                   url="https:www.youtube.com/watch?v=ysz5S6PUM-U"
+                /> */}
+                <img
+                  className={classes.image}
+                  src={data.course[0].image}
+                  alt=" main course"
                 />
                 <Paper elevation={0} className={classes.introDetail}>
                   <Typography

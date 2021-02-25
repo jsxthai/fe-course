@@ -1,4 +1,4 @@
-import { Button, ButtonBase, InputBase } from "@material-ui/core";
+import { Button, ButtonBase, Hidden, InputBase } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
@@ -70,6 +70,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "31px",
       cursor: "pointer",
       marginLeft: "1rem",
+      marginRight: "1rem",
     },
     searchForm: {
       flex: 1,
@@ -86,18 +87,15 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     leftMenu: {
       display: "flex",
-      width: "60%",
+      // width: "60%",
+      flex: 1,
       alignItems: "center",
-      justifyContent: "flex-start",
+      justifyContent: "space-between",
       marginleft: "3rem",
     },
-    rightMenu: {
-      display: "flex",
-      alignItems: "center",
-      marginRight: "3rem",
-    },
+
     menuCategory: {
-      margin: "0 1.5rem",
+      marginRight: "1.5rem",
     },
     cartIcon: {
       margin: "0 1.3rem",
@@ -122,35 +120,44 @@ export default function Variants() {
     <>
       <Paper elevation={0} className={classes.header}>
         <div className={classes.leftMenu}>
+          <Hidden smUp>
+            <ButtonBase disableRipple className={classes.cartIcon}>
+              <AddShoppingCartIcon />
+            </ButtonBase>
+          </Hidden>
+
           <Link to="/">
             <img className={classes.logo} src={logo} alt={"logo"} />
           </Link>
 
-          <Link to="/categories" className={classes.link}>
-            <ButtonBase className={classes.menuCategory} disableRipple>
-              Categories
-            </ButtonBase>
-          </Link>
-          {/* //search */}
-          <Search />
-        </div>
+          <Hidden smDown>
+            <Link to="/categories" className={classes.link}>
+              <ButtonBase className={classes.menuCategory} disableRipple>
+                Categories
+              </ButtonBase>
+            </Link>
+          </Hidden>
 
-        <div className={classes.rightMenu}>
+          <Hidden xsDown>
+            <Search />
+          </Hidden>
+
           <ButtonBase disableRipple className={classes.cartIcon}>
             <AddShoppingCartIcon />
           </ButtonBase>
-          <Button disableRipple variant="outlined" color="secondary">
-            Log in
-          </Button>
-          <div className={classes.margin03}></div>
-          <Button disableRipple variant="outlined" color="primary">
-            Sign up
-          </Button>
+
+          <Hidden smDown>
+            <Button disableRipple variant="outlined" color="secondary">
+              Log in
+            </Button>
+            <div className={classes.margin03}></div>
+            <Button disableRipple variant="outlined" color="primary">
+              Sign up
+            </Button>
+            <div className={classes.margin03}></div>
+          </Hidden>
         </div>
       </Paper>
-      {/* 
-
-      <HeaderTitle /> */}
     </>
   );
 }
