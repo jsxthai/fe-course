@@ -68,12 +68,7 @@ const Course = ({ data }: { data: CoursesData }) => {
             {data.name}
           </Typography>
 
-          <Typography
-            gutterBottom
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          >
+          <Typography gutterBottom variant="subtitle1" component="p">
             {
               "Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code templates included."
             }

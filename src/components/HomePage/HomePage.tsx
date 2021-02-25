@@ -30,11 +30,11 @@ export default function HomePage() {
     <Paper className={classes.body}>
       <Header />
       <Switch>
-        <Route>
+        <Route exact path={"/"}>
           <HeaderTitle />
           <Courses />
         </Route>
-        <Route path={"/course/:id"}>
+        <Route exact path={"/course/:name"}>
           <CourseDetail />
         </Route>
         <Route exact path={"/search"}>
