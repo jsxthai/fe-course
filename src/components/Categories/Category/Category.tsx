@@ -9,12 +9,6 @@ import React from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    categories: {
-      display: "flex",
-      justifyContent: "center",
-      height: "933px",
-      cursor: "pointer",
-    },
     category: {
       width: "1340px",
       height: "auto",
@@ -34,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 302,
       height: 426,
       borderRadius: 4,
+      cursor: "pointer",
     },
     itemCategoryName: {
       padding: "0.5rem 0 0 1rem",
@@ -46,8 +41,6 @@ const Categories = ({ name, src }: { name: string; src: string }) => {
   const classes = useStyles();
 
   return (
-    // <div>
-
     <Paper elevation={0} className={classes.itemCategory}>
       <img className={classes.itemCategoryImg} src={src} alt="" />
       <Typography

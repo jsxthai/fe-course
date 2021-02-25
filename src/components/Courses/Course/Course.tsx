@@ -10,6 +10,7 @@ import {
 import Card from "@material-ui/core/Card";
 import React from "react";
 import { Link, Route } from "react-router-dom";
+import { truncateString } from "../../../helpers/truncate";
 import { CoursesData } from "../interface";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -39,6 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: "4px 8px",
       fontWeight: "bold",
     },
+    truncate: {},
   })
 );
 
@@ -57,11 +59,16 @@ const Course = ({ data }: { data: CoursesData }) => {
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="h2">
-            {data.name}
+            {truncateString(data.name, 20)}
           </Typography>
 
-          <Typography gutterBottom variant="subtitle1" component="p">
-            {data.description}
+          <Typography
+            className={classes.truncate}
+            gutterBottom
+            variant="subtitle1"
+            component="p"
+          >
+            {truncateString(data.description)}
           </Typography>
           <Typography
             gutterBottom
@@ -69,7 +76,7 @@ const Course = ({ data }: { data: CoursesData }) => {
             color="textSecondary"
             component="p"
           >
-            {data.user.name}
+            {truncateString(data.user.name, 20)}
           </Typography>
           <Paper elevation={0} className={classes.bestseller}>
             Bestseller

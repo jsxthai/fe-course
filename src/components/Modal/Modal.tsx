@@ -9,7 +9,7 @@ import {
 import Backdrop from "@material-ui/core/Backdrop";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
-
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     modal: {
@@ -18,25 +18,29 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
     },
     lecture: {
+      display: "flex",
+      alignItems: "center",
       margin: "1rem",
       cursor: "pointer",
       "&:hover": {
         color: "red",
       },
     },
+    icon: {
+      marginRight: "1rem",
+    },
   })
 );
 
 const Modal = ({ list }: { list: any }) => {
-  console.log("list", list);
-
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const [video, setVideo] = useState("");
 
-  const handleOpen = (videoUrl: any) => {
-    setOpen(true);
-    setVideo(videoUrl);
+  const handleOpen = async (videoUrl: any) => {
+    await setVideo(videoUrl);
+    await setOpen(true);
+    console.log(video);
   };
 
   const handleClose = () => {
@@ -51,6 +55,7 @@ const Modal = ({ list }: { list: any }) => {
                 onClick={() => handleOpen(item.video)}
                 className={classes.lecture}
               >
+                <PlayCircleFilledIcon className={classes.icon} />
                 {item.name}
               </div>
               <CusTomModal

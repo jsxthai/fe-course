@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     category: {
       maxWidth: "1340px",
-      cursor: "pointer",
       height: "auto",
       padding: "0 2rem",
       fontWeight: "bold",

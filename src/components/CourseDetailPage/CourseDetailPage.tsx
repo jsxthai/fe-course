@@ -16,10 +16,11 @@ import {
 } from "@material-ui/core";
 import Check from "@material-ui/icons/Check";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import React from "react";
+import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
 import Modal from "../Modal";
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -80,6 +81,9 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "340px",
       height: "191px",
     },
+    p: {
+      margin: "1rem 0",
+    },
   })
 );
 
@@ -123,28 +127,36 @@ const CourseDetail = (): JSX.Element => {
     },
   });
 
+  const [isEnroll, setIsEnroll] = useState(false);
+
   if (loading) return <div>Loading ... </div>;
   if (error) return <div>Error {error}</div>;
 
-  const isEnroll = false;
+  const handleEnrollCourse = () => {
+    setIsEnroll(!isEnroll);
+  };
   return (
     <div>
       <Paper elevation={0} className={classes.root}>
         <Paper elevation={0} className={classes.content}>
           <Paper elevation={0} className={classes.contentLeft}>
             <Typography variant="h4" color="initial" component="h1">
-              {"Kiến thức cơ bản, cốt lõi dân IT cần học trước"}
+              {data.course[0].name}
+              {isEnroll && " (you have enrolled)"}
             </Typography>
-            <Typography variant="subtitle1" color="initial" component="p">
-              {
-                "Kiến thức cơ bản dành cho dân IT, không phân biệt bạn theo Front-end, Back-end hay Devops"
-              }
+            <Typography
+              variant="subtitle1"
+              color="initial"
+              component="p"
+              className={classes.p}
+            >
+              {data.course[0].description}
             </Typography>
             {!isEnroll && (
               <div>
                 {/* what learn */}
                 <Typography variant="h5" color="initial" component="h2">
-                  {"Bạn sẽ học được gì"}
+                  {"What you'll learn"}
                 </Typography>
 
                 {/* list */}
@@ -167,7 +179,7 @@ const CourseDetail = (): JSX.Element => {
 
             {/* content */}
             <Typography variant="h5" color="initial" component="h2">
-              {"Nội dung khóa học"}
+              {"Course content"}
             </Typography>
 
             <div>
@@ -222,29 +234,31 @@ const CourseDetail = (): JSX.Element => {
                     variant="outlined"
                     color="primary"
                     className={classes.btnEnroll}
+                    fullWidth
+                    onClick={handleEnrollCourse}
                   >
-                    Tham gia
+                    Enroll Now
                   </Button>
                   <List>
                     <ListItem className={classes.listItem}>
                       <ListItemIcon className={classes.listItemIcon}>
                         <Check />
                       </ListItemIcon>
-                      <ListItemText primary="Học mọi lúc, mọi nơi" />
+                      <ListItemText primary="Learn any time, any where" />
                     </ListItem>
 
                     <ListItem className={classes.listItem}>
                       <ListItemIcon className={classes.listItemIcon}>
                         <Check />
                       </ListItemIcon>
-                      <ListItemText primary="Lộ trình học tiêu chuẩn" />
+                      <ListItemText primary="Step by step guides" />
                     </ListItem>
 
                     <ListItem className={classes.listItem}>
                       <ListItemIcon className={classes.listItemIcon}>
                         <Check />
                       </ListItemIcon>
-                      <ListItemText primary="Trình độ cơ bản" />
+                      <ListItemText primary="Learn different tools or technologies" />
                     </ListItem>
                   </List>
                 </Paper>
