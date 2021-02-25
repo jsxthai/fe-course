@@ -10,6 +10,7 @@ import {
 import Card from "@material-ui/core/Card";
 import React from "react";
 import { Link, Route } from "react-router-dom";
+import { CoursesData } from "../interface";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,15 +41,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface CoursesData {
-  id: number;
-  name: string;
-  price: number;
-  user: {
-    name: string;
-  };
-}
-
 const Course = ({ data }: { data: CoursesData }) => {
   const classes = useStyles();
 
@@ -57,11 +49,10 @@ const Course = ({ data }: { data: CoursesData }) => {
       <Card className={classes.root}>
         <CardMedia
           component={Link}
-          to={`/course/${data.name}`}
+          to={`/course/${data.id}`}
           className={classes.media}
           title="Paella dish"
-          image="https://img-a.udemycdn.com/course/240x135/567828_67d0.jpg?U1A3meyOU2jrEdTUMTvWzJpdzjIzlYdKBUPkVqFiIIyugs2U4PDpgSjwAFxVdJaeAAXA3t3ESRo9vh42eJuKLz4ILX-4t3UYv3FW0s6P3Er7gqSduM16QfwfuihD"
-          // onClick={handleClick}
+          image={data.image}
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="h2">
@@ -69,9 +60,7 @@ const Course = ({ data }: { data: CoursesData }) => {
           </Typography>
 
           <Typography gutterBottom variant="subtitle1" component="p">
-            {
-              "Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code templates included."
-            }
+            {data.description}
           </Typography>
           <Typography
             gutterBottom

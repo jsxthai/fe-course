@@ -9,5 +9,5 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-console.log(apolloServerUri);
+// console.log(apolloServerUri);
 export default client;

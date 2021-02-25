@@ -71,7 +71,7 @@ export default function Variants() {
               <MovieIcon />
             </div>
             <div className={classes.titleDetailText}>
-              <h2>130,000 online courses</h2>
+              <h2>130 online courses</h2>
               <div>Enjoy a variety of fresh topics</div>
             </div>
           </Paper>

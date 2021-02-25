@@ -3,7 +3,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import React from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import Categories from "../Categories";
-import CourseDetail from "../CourseDetail";
+import CourseDetailPage from "../CourseDetailPage";
 import Courses from "../Courses";
 import Header from "../Header";
 import HeaderTitle from "../Header/HeaderTitle";
@@ -36,8 +36,8 @@ export default function HomePage() {
           <Courses />
           <Categories />
         </Route>
-        <Route exact path={"/course/:name"}>
-          <CourseDetail />
+        <Route exact path={"/course/:id"}>
+          <CourseDetailPage />
         </Route>
         <Route exact path={"/search"}>
           <ResultSearch text={String(query.get("text"))} />

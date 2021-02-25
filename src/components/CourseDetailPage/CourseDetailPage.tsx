@@ -1,3 +1,4 @@
+import { gql, useQuery } from "@apollo/client";
 import {
   Accordion,
   AccordionDetails,
@@ -18,7 +19,6 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import React from "react";
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
-import Error from "../Error";
 import Modal from "../Modal";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -79,23 +79,48 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function generate(element: React.ReactElement) {
-  return [0, 1, 2].map((value) =>
-    React.cloneElement(element, {
-      key: value,
-    })
-  );
-}
+const GET_DETAIL_COURSE = gql`
+  query CourseDetail($id: ID!) {
+    course(id: $id) {
+      name
+      price
+      user {
+        name
+      }
+      CourseDetail {
+        id
+        text
+        courseId
+      }
+      lecture {
+        text
+        courseId
+        content {
+          name
+          video
+          id
+        }
+      }
+      categories {
+        name
+      }
+    }
+  }
+`;
 
 const CourseDetail = (): JSX.Element => {
-  let { name }: { name: string } = useParams();
   const classes = useStyles();
-  if (name === "10") {
-    return <Error error={"Not found course"} />;
-  }
+  let { id }: { id: string } = useParams();
+  const { loading, error, data } = useQuery(GET_DETAIL_COURSE, {
+    variables: {
+      id: id,
+    },
+  });
+
+  if (loading) return <div>Loading ... </div>;
+  if (error) return <div>Error {error}</div>;
 
   const isEnroll = false;
-  // modal
 
   return (
     <div>
@@ -116,19 +141,21 @@ const CourseDetail = (): JSX.Element => {
                 <Typography variant="h5" color="initial" component="h2">
                   {"Bạn sẽ học được gì"}
                 </Typography>
-                <Typography variant="subtitle1" color="initial" component="p">
-                  {"Kiến thức cơ bản, cốt lõi dân IT cần học trước"}
-                </Typography>
+
                 {/* list */}
                 <List>
-                  {generate(
-                    <ListItem className={classes.listItem}>
-                      <ListItemIcon className={classes.listItemIcon}>
-                        <Check />
-                      </ListItemIcon>
-                      <ListItemText primary="Single-line item" />
-                    </ListItem>
-                  )}
+                  {data
+                    ? data.course[0].CourseDetail.map(
+                        (item: { id: number; text: string }) => (
+                          <ListItem key={item.id} className={classes.listItem}>
+                            <ListItemIcon className={classes.listItemIcon}>
+                              <Check />
+                            </ListItemIcon>
+                            <ListItemText primary={item.text} />
+                          </ListItem>
+                        )
+                      )
+                    : null}
                 </List>
               </div>
             )}
@@ -139,36 +166,25 @@ const CourseDetail = (): JSX.Element => {
             </Typography>
 
             <div>
-              <Accordion>
-                <AccordionSummary
-                  className={classes.accSum}
-                  expandIcon={<ExpandMore className={classes.accSum} />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography>{"Phan 1"}</Typography>
-                </AccordionSummary>
-                <AccordionDetails className={classes.accDetail}>
-                  <List>
-                    <Modal />
-                  </List>
-                </AccordionDetails>
-              </Accordion>
-
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMore />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography>{"Phan 1"}</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <List>
-                    <Modal />
-                  </List>
-                </AccordionDetails>
-              </Accordion>
+              {data
+                ? data.course[0].lecture.map((item: any, index: any) => (
+                    <Accordion key={index}>
+                      <AccordionSummary
+                        className={classes.accSum}
+                        expandIcon={<ExpandMore className={classes.accSum} />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                      >
+                        <Typography>{item.text}</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails className={classes.accDetail}>
+                        <List>
+                          <Modal list={item.content} />
+                        </List>
+                      </AccordionDetails>
+                    </Accordion>
+                  ))
+                : null}
             </div>
           </Paper>
 
@@ -204,21 +220,21 @@ const CourseDetail = (): JSX.Element => {
                       <ListItemIcon className={classes.listItemIcon}>
                         <Check />
                       </ListItemIcon>
-                      <ListItemText primary="Single-line itssssssssssem" />
+                      <ListItemText primary="Học mọi lúc, mọi nơi" />
                     </ListItem>
 
                     <ListItem className={classes.listItem}>
                       <ListItemIcon className={classes.listItemIcon}>
                         <Check />
                       </ListItemIcon>
-                      <ListItemText primary="Single-em sssssss" />
+                      <ListItemText primary="Lộ trình học tiêu chuẩn" />
                     </ListItem>
 
                     <ListItem className={classes.listItem}>
                       <ListItemIcon className={classes.listItemIcon}>
                         <Check />
                       </ListItemIcon>
-                      <ListItemText primary="Sinne item" />
+                      <ListItemText primary="Trình độ cơ bản" />
                     </ListItem>
                   </List>
                 </Paper>

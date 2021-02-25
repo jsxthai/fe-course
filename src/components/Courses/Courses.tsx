@@ -1,16 +1,19 @@
+import { gql, useQuery } from "@apollo/client";
 import Grid from "@material-ui/core/Grid";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
-import Course from "./Course/Course";
-import { gql, useQuery } from "@apollo/client";
 import MyPagination from "../MyPagination";
+import Course from "./Course/Course";
+import { CoursesData } from "./interface";
 
 const GET_COURSES = gql`
   query GetCourse {
     courses {
       id
       name
+      description
+      image
       price
       user {
         name
@@ -42,15 +45,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface CoursesData {
-  id: number;
-  name: string;
-  price: number;
-  user: {
-    name: string;
-  };
-}
-
 export default function Courses(): JSX.Element {
   const classes = useStyles();
   const { loading, error, data } = useQuery(GET_COURSES);
@@ -60,7 +54,6 @@ export default function Courses(): JSX.Element {
   if (error) return <div>Error {error}</div>;
 
   const funcCB = (number: number) => {
-    console.log(number);
     setPage(number);
   };
 
