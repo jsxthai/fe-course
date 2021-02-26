@@ -98,7 +98,8 @@ const Login: React.FC = () => {
             ...data.login.user,
           })
         );
-        history.push("/");
+        // history.push("/");
+        history.goBack();
       }
       if (data.login && data.login.user && data.login.user.role === "admin") {
         history.push("/dashboard");
