@@ -1,15 +1,9 @@
-import {
-  Button,
-  FormControl,
-  FormHelperText,
-  Input,
-  InputLabel,
-  Paper,
-  TextField,
-  Typography,
-} from "@material-ui/core";
-import React from "react";
+import { Button, Paper, TextField, Typography } from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { gql, useMutation } from "@apollo/client";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -58,11 +52,56 @@ const useStyles = makeStyles((theme) =>
         border: "none",
       },
     },
+    error: {
+      color: "#ec5252",
+    },
   })
 );
 
-const Login = () => {
+const LOGIN = gql`
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      user {
+        name
+        email
+        role
+      }
+      token
+    }
+  }
+`;
+
+type FormData = {
+  email: string;
+  password: string;
+};
+
+const Login: React.FC = () => {
+  const history = useHistory();
   const classes = useStyles();
+  const { register, handleSubmit, errors } = useForm<FormData>();
+
+  const [login, { loading, error }] = useMutation(LOGIN, {
+    onCompleted: (data) => {
+      if (data.login && data.login.user && data.login.user.role === "user") {
+        if (data.login.token) {
+          localStorage.setItem("JWT", JSON.stringify(data.login.token));
+        }
+        history.push("/");
+      }
+      if (data.login && data.login.user && data.login.user.role === "admin") {
+        history.push("/dashboard");
+      }
+    },
+    onError: (error) => console.error("LOGIN error", error),
+  });
+  const onSubmit = (data: FormData) => {
+    login({
+      variables: {
+        ...data,
+      },
+    });
+  };
 
   return (
     <Paper elevation={0} className={classes.root}>
@@ -75,52 +114,50 @@ const Login = () => {
           </Paper>
 
           <Paper elevation={0} className={classes.inputForm}>
-            <TextField
-              required
-              fullWidth
-              id="outlined-required"
-              label="Email"
-              variant="outlined"
-            />
-            <TextField
-              required
-              fullWidth
-              id="outlined-required"
-              label="Password"
-              variant="outlined"
-            />
-            <Button
-              disableRipple
-              variant="outlined"
-              color="primary"
-              className={classes.btnLogin}
-              fullWidth
-              // onClick={handleEnrollCourse}
-            >
-              Log in
-            </Button>
-            {/* <FormControl fullWidth>
-              <InputLabel htmlFor="my-input">Email address</InputLabel>
-              <Input
+            <form onSubmit={handleSubmit(onSubmit)}>
+              {/* ref in TextField: thay ref = inputRef */}
+              {error && (
+                <Typography
+                  variant="h6"
+                  color="initial"
+                  component="p"
+                  className={classes.error}
+                >
+                  Login fail
+                </Typography>
+              )}
+              <TextField
+                required
                 fullWidth
-                id="my-input"
-                aria-describedby="my-helper-text"
+                id="outlined-required"
+                label="Email"
+                variant="outlined"
+                name="email"
+                inputRef={register}
+                error={!!errors.email}
+                helperText={errors.email ? errors.email.message : ""}
               />
-              <FormHelperText id="my-helper-text">
-                We'll never share your email.
-              </FormHelperText>
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel htmlFor="my-input">Email address</InputLabel>
-              <Input
+              <TextField
+                required
                 fullWidth
-                id="my-input"
-                aria-describedby="my-helper-text"
+                label="Password"
+                variant="outlined"
+                name="password"
+                inputRef={register}
+                error={!!errors.password}
+                helperText={errors.password ? errors.password.message : ""}
               />
-              <FormHelperText id="my-helper-text">
-                We'll never share your email.
-              </FormHelperText>
-            </FormControl> */}
+              <Button
+                disableRipple
+                variant="outlined"
+                color="primary"
+                className={classes.btnLogin}
+                fullWidth
+                type="submit"
+              >
+                {loading ? " Loading ..." : "Login"}
+              </Button>
+            </form>
           </Paper>
         </Paper>
       </Paper>

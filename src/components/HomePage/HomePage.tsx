@@ -27,7 +27,6 @@ function useQuery() {
 export default function HomePage() {
   const classes = useStyles();
   let query = useQuery();
-  console.log(query.get("text"));
 
   return (
     <Paper elevation={0} className={classes.body}>
@@ -46,6 +45,10 @@ export default function HomePage() {
         </Route>
         <Route exact path={"/signup"}>
           <Signup />
+        </Route>
+
+        <Route exact path={"/dashboard"}>
+          <div> dashboard comming soon</div>
         </Route>
         <Route exact path={"/search"}>
           <ResultSearch text={String(query.get("text"))} />
