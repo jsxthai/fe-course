@@ -1,64 +1,11 @@
+import { gql, useMutation } from "@apollo/client";
 import { Button, Paper, TextField, Typography } from "@material-ui/core";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { gql, useMutation } from "@apollo/client";
-import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { login as userLogin } from "../../features/user/userSilce";
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      justifyContent: "center",
-    },
-    login: {
-      width: 1340,
-      display: "flex",
-      justifyContent: "center",
-    },
-    form: {
-      marginTop: "2rem",
-      width: 380,
-    },
-    title: {
-      height: 70,
-      padding: "1rem",
-      display: "flex",
-      alignItems: "center",
-      borderBottom: "1px solid  #8a92a3",
-    },
-    inputForm: {
-      padding: "1.5rem 1rem",
-      display: "flex",
-      flexDirection: "column",
-      "& .MuiTextField-root": {
-        margin: theme.spacing(1),
-      },
-      alignItems: "center",
-    },
-    input: {
-      borderRadius: 10,
-      display: "block",
-    },
-    btnLogin: {
-      background: "#ec5252",
-      fontSize: "2rem",
-      padding: "1.7rem",
-      margin: theme.spacing(1),
-      border: "none",
-      "&:hover": {
-        opacity: 0.7,
-        background: "#ec5252",
-        border: "none",
-      },
-    },
-    error: {
-      color: "#ec5252",
-    },
-  })
-);
+import useStyles from "./styles";
 
 const SIGNUP = gql`
   mutation CreateUser($name: String!, $email: String!, $password: String!) {

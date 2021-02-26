@@ -1,5 +1,4 @@
 import Paper from "@material-ui/core/Paper";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import React from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import Categories from "../Categories";
@@ -10,15 +9,7 @@ import HeaderTitle from "../Header/HeaderTitle";
 import Login from "../Login";
 import ResultSearch from "../ResultSearch";
 import Signup from "../Signup";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    body: {
-      display: "flex",
-      flexDirection: "column",
-    },
-  })
-);
+import useStyles from "./styles";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);

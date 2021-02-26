@@ -4,14 +4,11 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
-  createStyles,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  makeStyles,
   Paper,
-  Theme,
   Typography,
 } from "@material-ui/core";
 import Check from "@material-ui/icons/Check";
@@ -21,71 +18,7 @@ import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { RootState } from "../../reduxApp/store";
 import Modal from "../Modal";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      justifyContent: "center",
-    },
-    content: {
-      width: 1340,
-      display: "flex",
-      flexWrap: "wrap-reverse",
-    },
-    contentLeft: {
-      padding: "1.5rem",
-      flexBasis: 440,
-      flex: 2,
-    },
-    cententRight: {
-      padding: "1.5rem",
-      display: "flex",
-      justifyContent: "center",
-      flex: 1,
-    },
-    listItemIcon: {
-      minWidth: 35,
-    },
-    intro: {},
-    introDetail: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    },
-    price: {
-      margin: "1.5rem",
-      color: "#f05123",
-    },
-    listItem: {
-      margin: 0,
-      padding: 0,
-    },
-
-    accDetail: {
-      padding: "0 1rem",
-    },
-    accSum: {
-      margin: 0,
-    },
-    btnEnroll: {
-      background: "#f05123",
-      border: "none",
-      "&:hover": {
-        opacity: 0.7,
-        background: "#f05123",
-        border: "none",
-      },
-    },
-    image: {
-      width: "340px",
-      height: "191px",
-    },
-    p: {
-      margin: "1rem 0",
-    },
-  })
-);
+import useStyles from "./styles";
 
 const CREATE_COURSE_ENROLL = gql`
   mutation CreateCourseEnroll($userId: ID!, $courseId: ID!) {
@@ -183,9 +116,14 @@ const CourseDetail = (): JSX.Element => {
   if (error) return <div>Error {error}</div>;
 
   const handleEnrollCourse = () => {
-    // setIsEnroll(!isEnroll);
     if (user.id) {
       createEnroll({
+        variables: {
+          userId: Number(user.id),
+          courseId: Number(id),
+        },
+      });
+      checkEnroll({
         variables: {
           userId: Number(user.id),
           courseId: Number(id),

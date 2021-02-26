@@ -1,17 +1,6 @@
-import React, { useState } from "react";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Pagination from "@material-ui/lab/Pagination";
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      "& > *": {
-        marginTop: theme.spacing(2),
-      },
-      width: "auto",
-    },
-  })
-);
+import React, { useState } from "react";
+import useStyles from "./styles";
 
 export default function MyPagination({
   count,

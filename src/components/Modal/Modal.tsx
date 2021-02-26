@@ -1,36 +1,9 @@
-import {
-  createStyles,
-  Fade,
-  makeStyles,
-  Modal as CusTomModal,
-  Theme,
-} from "@material-ui/core";
+import { Fade, Modal as CusTomModal } from "@material-ui/core";
 import Backdrop from "@material-ui/core/Backdrop";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    modal: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    lecture: {
-      display: "flex",
-      alignItems: "center",
-      margin: "1rem",
-      cursor: "pointer",
-      "&:hover": {
-        color: "red",
-      },
-    },
-    icon: {
-      marginRight: "1rem",
-    },
-  })
-);
+import useStyles from "./styles";
 
 const Modal = ({ list }: { list: any }) => {
   const [open, setOpen] = useState(false);

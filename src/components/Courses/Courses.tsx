@@ -1,11 +1,11 @@
 import { gql, useQuery } from "@apollo/client";
 import Grid from "@material-ui/core/Grid";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
 import MyPagination from "../MyPagination";
 import Course from "./Course/Course";
 import { CoursesData } from "./interface";
+import useStyles from "./styles";
 
 const GET_COURSES = gql`
   query GetCourse {
@@ -21,35 +21,6 @@ const GET_COURSES = gql`
     }
   }
 `;
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      // flexWrap: "wrap",
-      justifyContent: "center",
-    },
-    courses: {
-      maxWidth: 1340,
-      display: "flex",
-    },
-    wrap: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyItems: "center",
-    },
-    pagi: {
-      width: "auto",
-      display: "flex",
-      justifyItems: "center",
-      alignItems: "center",
-    },
-    course: {
-      margin: "2rem 1rem",
-      fontWeight: "bold",
-    },
-  })
-);
 
 export default function Courses(): JSX.Element {
   const classes = useStyles();

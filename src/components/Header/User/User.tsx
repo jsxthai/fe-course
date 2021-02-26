@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const User = () => {
   const classes = useStyles();
   return (
+    //default img
     <div>
       <img
         className={classes.img}
