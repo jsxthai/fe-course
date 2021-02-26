@@ -17,10 +17,8 @@ import {
 import Check from "@material-ui/icons/Check";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import React, { useState } from "react";
-import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
 import Modal from "../Modal";
-import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

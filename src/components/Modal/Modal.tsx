@@ -1,4 +1,3 @@
-import { useQuery } from "@apollo/client";
 import {
   createStyles,
   Fade,
@@ -7,9 +6,10 @@ import {
   Theme,
 } from "@material-ui/core";
 import Backdrop from "@material-ui/core/Backdrop";
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
-import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     modal: {
