@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import {
   Accordion,
   AccordionDetails,
@@ -16,8 +16,10 @@ import {
 } from "@material-ui/core";
 import Check from "@material-ui/icons/Check";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import { RootState } from "../../reduxApp/store";
 import Modal from "../Modal";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -85,6 +87,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const CREATE_COURSE_ENROLL = gql`
+  mutation CreateCourseEnroll($userId: ID!, $courseId: ID!) {
+    createCourseEnroll(userId: $userId, courseId: $courseId) {
+      success
+      message
+    }
+  }
+`;
+
 const GET_DETAIL_COURSE = gql`
   query CourseDetail($id: ID!) {
     course(id: $id) {
@@ -116,22 +127,73 @@ const GET_DETAIL_COURSE = gql`
   }
 `;
 
+const CHECK_ENROLL_COURSE = gql`
+  mutation CheckEnroll($userId: ID!, $courseId: ID!) {
+    getCourseEnroll(userId: $userId, courseId: $courseId)
+  }
+`;
+
 const CourseDetail = (): JSX.Element => {
+  const history = useHistory();
   const classes = useStyles();
-  let { id }: { id: string } = useParams();
+  const user = useSelector((state: RootState) => state.user);
+  const { id }: { id: string } = useParams();
+  const [isEnroll, setIsEnroll] = useState(false);
+
+  const jwt = JSON.parse(localStorage.getItem("JWT") || "{}");
+
+  const [createEnroll] = useMutation(CREATE_COURSE_ENROLL, {
+    context: {
+      headers: {
+        authorization: `Bearer ${jwt}`,
+      },
+    },
+  });
+  const [checkEnroll] = useMutation(CHECK_ENROLL_COURSE, {
+    onCompleted: (data) => {
+      if (data.getCourseEnroll === true) {
+        setIsEnroll(true);
+      }
+    },
+    context: {
+      headers: {
+        authorization: `Bearer ${jwt}`,
+      },
+    },
+  });
+
   const { loading, error, data } = useQuery(GET_DETAIL_COURSE, {
     variables: {
       id: id,
     },
   });
 
-  const [isEnroll, setIsEnroll] = useState(false);
+  useEffect(() => {
+    if (user.id) {
+      checkEnroll({
+        variables: {
+          userId: Number(user.id),
+          courseId: Number(id),
+        },
+      });
+    }
+  }, [checkEnroll, id, user.id]);
 
   if (loading) return <div>Loading ... </div>;
   if (error) return <div>Error {error}</div>;
 
   const handleEnrollCourse = () => {
-    setIsEnroll(!isEnroll);
+    // setIsEnroll(!isEnroll);
+    if (user.id) {
+      createEnroll({
+        variables: {
+          userId: Number(user.id),
+          courseId: Number(id),
+        },
+      });
+    } else {
+      history.push("/login");
+    }
   };
   return (
     <div>
@@ -140,7 +202,7 @@ const CourseDetail = (): JSX.Element => {
           <Paper elevation={0} className={classes.contentLeft}>
             <Typography variant="h4" color="initial" component="h1">
               {data.course[0].name}
-              {isEnroll && " (you have enrolled)"}
+              {isEnroll && <span>(you have enrolled)</span>}
             </Typography>
             <Typography
               variant="subtitle1"

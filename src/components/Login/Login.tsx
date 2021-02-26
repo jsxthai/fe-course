@@ -1,9 +1,11 @@
+import { gql, useMutation } from "@apollo/client";
 import { Button, Paper, TextField, Typography } from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { gql, useMutation } from "@apollo/client";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { login as userLogin } from "../../features/user/userSilce";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -65,6 +67,7 @@ const LOGIN = gql`
         name
         email
         role
+        id
       }
       token
     }
@@ -77,6 +80,8 @@ type FormData = {
 };
 
 const Login: React.FC = () => {
+  const dispatch = useDispatch();
+
   const history = useHistory();
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm<FormData>();
@@ -87,6 +92,12 @@ const Login: React.FC = () => {
         if (data.login.token) {
           localStorage.setItem("JWT", JSON.stringify(data.login.token));
         }
+        dispatch(
+          userLogin({
+            isLogin: true,
+            ...data.login.user,
+          })
+        );
         history.push("/");
       }
       if (data.login && data.login.user && data.login.user.role === "admin") {

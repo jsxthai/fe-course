@@ -4,6 +4,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { gql, useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login as userLogin } from "../../features/user/userSilce";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -80,6 +82,7 @@ type FormSignup = {
 };
 
 const Login: React.FC = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm<FormSignup>();
@@ -94,14 +97,13 @@ const Login: React.FC = () => {
         if (data.createUser.token) {
           localStorage.setItem("JWT", JSON.stringify(data.createUser.token));
         }
+        dispatch(
+          userLogin({
+            isLogin: true,
+            ...data.createUser.user,
+          })
+        );
         history.push("/");
-      }
-      if (
-        data.createUser &&
-        data.createUser.user &&
-        data.createUser.user.role === "admin"
-      ) {
-        history.push("/dashboard");
       }
     },
     onError: (error) => console.error("SIGN error", error),

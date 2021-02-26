@@ -40,6 +40,7 @@ export default function HomePage() {
         <Route exact path={"/course/:id"}>
           <CourseDetailPage />
         </Route>
+
         <Route exact path={"/login"}>
           <Login />
         </Route>

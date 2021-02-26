@@ -4,9 +4,12 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import MenuIcon from "@material-ui/icons/Menu";
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
+import { RootState } from "../../reduxApp/store";
 import Search from "./Search";
+import User from "./User";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -123,6 +126,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Variants() {
   const classes = useStyles();
+  const user = useSelector((state: RootState) => state.user);
 
   return (
     <Paper elevation={0} className={classes.body}>
@@ -154,20 +158,27 @@ export default function Variants() {
             <AddShoppingCartIcon />
           </ButtonBase>
 
-          <Hidden smDown>
-            <Link to="/login" className={classes.link}>
-              <Button disableRipple variant="outlined" color="secondary">
-                Log in
-              </Button>
-            </Link>
-            <div className={classes.margin03}></div>
-            <Link to="/signup" className={classes.link}>
-              <Button disableRipple variant="outlined" color="primary">
-                Sign up
-              </Button>
-            </Link>
-            <div className={classes.margin03}></div>
-          </Hidden>
+          {!user.isLogin ? (
+            <Hidden smDown>
+              <Link to="/login" className={classes.link}>
+                <Button disableRipple variant="outlined" color="secondary">
+                  Log in
+                </Button>
+              </Link>
+              <div className={classes.margin03}></div>
+              <Link to="/signup" className={classes.link}>
+                <Button disableRipple variant="outlined" color="primary">
+                  Sign up
+                </Button>
+              </Link>
+              <div className={classes.margin03}></div>
+            </Hidden>
+          ) : (
+            <>
+              <User />
+              <div className={classes.margin03}></div>
+            </>
+          )}
         </div>
       </Paper>
     </Paper>

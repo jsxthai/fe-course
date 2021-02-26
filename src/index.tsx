@@ -1,23 +1,26 @@
+import { ApolloProvider } from "@apollo/client";
 import { ThemeProvider } from "@material-ui/core/styles";
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import "./index.css";
-import theme from "./theme";
-import { BrowserRouter as Router } from "react-router-dom"; 
-import { ApolloProvider } from "@apollo/client";
-
 import client from "./setup/apolloClient";
+import store from "./reduxApp/store";
+import theme from "./theme";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
+    <Provider store={store}>
+      <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>
           <Router>
-          <App />
+            <App />
           </Router>
         </ThemeProvider>
-    </ApolloProvider>
+      </ApolloProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
