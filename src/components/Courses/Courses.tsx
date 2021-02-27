@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
@@ -27,7 +28,12 @@ export default function Courses(): JSX.Element {
   const { loading, error, data } = useQuery(GET_COURSES);
   const [page, setPage] = useState(1);
 
-  if (loading) return <div>Loading ... </div>;
+  if (loading)
+    return (
+      <div className={classes.root}>
+        <CircularProgress className={classes.courses} disableShrink />;
+      </div>
+    );
   if (error) return <div>Error {error}</div>;
 
   const funcCB = (number: number) => {
@@ -48,13 +54,11 @@ export default function Courses(): JSX.Element {
         </Typography>
         <div className={classes.root}>
           <Grid
-            className={classes.courses}
             container
-            alignContent="center"
+            direction="row"
+            justify="space-between"
             alignItems="center"
-            justify="space-around"
-            wrap="wrap"
-            spacing={2}
+            spacing={3}
           >
             {
               // pagination with array
@@ -62,7 +66,7 @@ export default function Courses(): JSX.Element {
                 ? data.courses
                     .slice((page - 1) * 4, page * 4)
                     .map((course: CoursesData, index: any) => (
-                      <Grid item key={index}>
+                      <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                         <Course data={course} />
                       </Grid>
                     ))

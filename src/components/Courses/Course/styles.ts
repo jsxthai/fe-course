@@ -3,9 +3,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core";
 export default makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      maxWidth: 300,
-      width: 260,
-      minWidth: 200,
+      // maxWidth: 320,
+      // width: "auto",
       borderRadius: 4,
     },
     media: {

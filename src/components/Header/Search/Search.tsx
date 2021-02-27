@@ -7,18 +7,25 @@ import useStyles from "./styles";
 const Search = () => {
   const classes = useStyles();
   let history = useHistory();
-  const textSearch = "text search";
-  const handleSearch = () => {
-    history.push("/search?text=" + textSearch);
+
+  const handleSearch = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const target = e.target as typeof e.target & {
+      keySearch: { value: string };
+      //
+    };
+    const keySearch = target.keySearch.value;
+    history.push("/search/" + keySearch);
   };
 
   return (
-    <form action="" className={classes.searchForm}>
-      <ButtonBase disableRipple onClick={handleSearch}>
+    <form className={classes.searchForm} onSubmit={handleSearch}>
+      <ButtonBase disableRipple>
         <SearchIcon style={{ color: "#73726c" }} />
       </ButtonBase>
       <InputBase
         fullWidth
+        name="keySearch"
         className={classes.search}
         placeholder="Search ..."
       ></InputBase>

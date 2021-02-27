@@ -1,6 +1,6 @@
 import Paper from "@material-ui/core/Paper";
 import React from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch, useLocation, useParams } from "react-router-dom";
 import Categories from "../Categories";
 import CourseDetailPage from "../CourseDetailPage";
 import Courses from "../Courses";
@@ -15,9 +15,12 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
+interface ParamTypes {
+  keySearch: string;
+}
+
 export default function HomePage() {
   const classes = useStyles();
-  let query = useQuery();
 
   return (
     <Paper elevation={0} className={classes.body}>
@@ -42,8 +45,8 @@ export default function HomePage() {
         <Route exact path={"/dashboard"}>
           <div> dashboard comming soon</div>
         </Route>
-        <Route exact path={"/search"}>
-          <ResultSearch text={String(query.get("text"))} />
+        <Route exact path={"/search/:keySearch"}>
+          <ResultSearch />
         </Route>
       </Switch>
     </Paper>
