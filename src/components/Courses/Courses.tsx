@@ -34,7 +34,8 @@ export default function Courses(): JSX.Element {
         <CircularProgress className={classes.courses} disableShrink />;
       </div>
     );
-  if (error) return <div>Error {error}</div>;
+  if (error) return <div>Error load courses</div>;
+  console.log("data", data);
 
   const funcCB = (number: number) => {
     setPage(number);
@@ -60,23 +61,22 @@ export default function Courses(): JSX.Element {
             alignItems="center"
             spacing={3}
           >
-            {
-              // pagination with array
-              data
-                ? data.courses
-                    .slice((page - 1) * 4, page * 4)
-                    .map((course: CoursesData, index: any) => (
-                      <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                        <Course data={course} />
-                      </Grid>
-                    ))
-                : null
-            }
+            {data
+              ? data.courses
+                  .slice((page - 1) * 4, page * 4)
+                  .map((course: CoursesData, index: any) => (
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                      <Course data={course} />
+                    </Grid>
+                  ))
+              : null}
           </Grid>
         </div>
       </div>
       <div className={classes.pagi}>
-        <MyPagination count={Number(data.courses.length)} func={funcCB} />
+        {data && (
+          <MyPagination count={Number(data.courses.length)} func={funcCB} />
+        )}
       </div>
     </div>
   );

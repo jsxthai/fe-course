@@ -11,16 +11,14 @@ import store from "./reduxApp/store";
 import theme from "./theme";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ApolloProvider client={client}>
-        <ThemeProvider theme={theme}>
-          <Router>
-            <App />
-          </Router>
-        </ThemeProvider>
-      </ApolloProvider>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <App />
+        </Router>
+      </ThemeProvider>
+    </ApolloProvider>
+  </Provider>,
   document.getElementById("root")
 );

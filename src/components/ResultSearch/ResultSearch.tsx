@@ -1,9 +1,8 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { Grid, Paper, Typography } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
+import { Grid } from "@material-ui/core";
+import React from "react";
 import { useParams } from "react-router-dom";
 import Course from "../Courses/Course";
-import { CoursesData } from "../Courses/interface";
 import { SEARCH } from "./gql";
 import useStyles from "./styles";
 
@@ -21,11 +20,12 @@ const ResultSearch = () => {
   });
 
   if (loading) return <div>Loading ... </div>;
-  if (error) return <div>error ... </div>;
+  if (error) return <div>Not found search with: {keySearch} </div>;
   console.log(data.search);
 
   return (
     <div className={classes.root}>
+      <h2> Result for {keySearch}</h2>
       <Grid
         container
         direction="row"
