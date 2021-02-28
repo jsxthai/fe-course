@@ -1,6 +1,7 @@
 import {
   Button,
   ButtonBase,
+  Drawer,
   Hidden,
   Menu,
   MenuItem,
@@ -15,6 +16,7 @@ import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
 import { RootState } from "../../reduxApp/store";
+import DropDown from "./DropDown";
 import Search from "./Search";
 import useStyles from "./styles";
 import User from "./User";
@@ -44,24 +46,50 @@ export default function Variants() {
   const history = useHistory();
   const user = useSelector((state: RootState) => state.user);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
+  const [isDrawer, setIsDrawer] = React.useState(false);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = (event: React.MouseEvent<HTMLElement>) => {
-    console.log(event.currentTarget.textContent);
     history.push("/search/" + event.currentTarget.textContent);
     setAnchorEl(null);
   };
+
+  const toggleDrawer = (open: boolean) => (
+    event: React.KeyboardEvent | React.MouseEvent
+  ) => {
+    console.log("clcick");
+    if (
+      event.type === "keydown" &&
+      ((event as React.KeyboardEvent).key === "Tab" ||
+        (event as React.KeyboardEvent).key === "Shift")
+    ) {
+      return;
+    }
+
+    setIsDrawer(open);
+  };
+
+  const getIsCloseForm = (data: boolean) => {
+    setIsDrawer(data);
+  };
+
   return (
     <Paper elevation={0} className={classes.body}>
       <Paper elevation={0} className={classes.header}>
         <div className={classes.leftMenu}>
           <Hidden smUp>
-            <ButtonBase disableRipple className={classes.cartIcon}>
+            <ButtonBase
+              onClick={toggleDrawer(true)}
+              disableRipple
+              className={classes.cartIcon}
+            >
               <MenuIcon />
             </ButtonBase>
+            <Drawer anchor="left" open={isDrawer} onClose={toggleDrawer(false)}>
+              <DropDown cb={getIsCloseForm} />
+            </Drawer>
           </Hidden>
 
           <Link to="/">
@@ -69,7 +97,6 @@ export default function Variants() {
           </Link>
 
           <Hidden smDown>
-            {/* <Link to="/categories" className={classes.link}> */}
             <ButtonBase
               aria-controls="menu-categories"
               className={classes.menuCategory}
@@ -94,7 +121,7 @@ export default function Variants() {
           </Hidden>
 
           <Hidden xsDown>
-            <Search />
+            <Search cb={getIsCloseForm} />
           </Hidden>
 
           <ButtonBase disableRipple className={classes.cartIcon}>

@@ -35,7 +35,6 @@ export default function Courses(): JSX.Element {
       </div>
     );
   if (error) return <div>Error load courses</div>;
-  console.log("data", data);
 
   const funcCB = (number: number) => {
     setPage(number);
@@ -57,7 +56,7 @@ export default function Courses(): JSX.Element {
           <Grid
             container
             direction="row"
-            justify="space-between"
+            justify="space-around"
             alignItems="center"
             spacing={3}
           >
@@ -65,7 +64,7 @@ export default function Courses(): JSX.Element {
               ? data.courses
                   .slice((page - 1) * 4, page * 4)
                   .map((course: CoursesData, index: any) => (
-                    <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                    <Grid item xs={12} sm={4} md={3} key={index}>
                       <Course data={course} />
                     </Grid>
                   ))

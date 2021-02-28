@@ -1,6 +1,6 @@
 import Paper from "@material-ui/core/Paper";
 import React from "react";
-import { Route, Switch, useLocation, useParams } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Categories from "../Categories";
 import CourseDetailPage from "../CourseDetailPage";
 import Courses from "../Courses";
@@ -11,13 +11,13 @@ import ResultSearch from "../ResultSearch";
 import Signup from "../Signup";
 import useStyles from "./styles";
 
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
+// function useQuery() {
+//   return new URLSearchParams(useLocation().search);
+// }
 
-interface ParamTypes {
-  keySearch: string;
-}
+// interface ParamTypes {
+//   keySearch: string;
+// }
 
 export default function HomePage() {
   const classes = useStyles();

@@ -17,6 +17,7 @@ const SIGNUP = gql`
         name
         email
         role
+        id
       }
     }
   }

@@ -110,5 +110,11 @@ export default makeStyles((theme: Theme) =>
       textDecoration: "none",
       color: "#3c3b37",
     },
+    list: {
+      width: 250,
+    },
+    spacing: {
+      margin: "1rem",
+    },
   })
 );

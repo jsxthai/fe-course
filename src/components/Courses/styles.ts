@@ -4,7 +4,7 @@ export default makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: "flex",
-      // flexWrap: "wrap",
+      flexWrap: "wrap",
       justifyContent: "center",
     },
     courses: {

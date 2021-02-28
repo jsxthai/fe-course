@@ -4,7 +4,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import useStyles from "./styles";
 
-const Search = () => {
+const Search = ({ cb }: { cb: Function }) => {
   const classes = useStyles();
   let history = useHistory();
 
@@ -16,6 +16,7 @@ const Search = () => {
     };
     const keySearch = target.keySearch.value;
     history.push("/search/" + keySearch);
+    cb(false); // close response menu
   };
 
   return (
